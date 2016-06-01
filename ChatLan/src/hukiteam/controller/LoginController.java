@@ -18,6 +18,7 @@ public class LoginController {
 					frame.setMessage("Input name!");
 				} else {
 					new ChatRoomController(name);
+					frame.dispose();
 				}
 			}
 		});

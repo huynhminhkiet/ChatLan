@@ -3,6 +3,7 @@ package hukiteam.view;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -71,6 +72,10 @@ public class ChatRoomFrame {
 	
 	// =======================================
 	
+	public void addSendActionListener(ActionListener actionListener) {
+		this.btnSend.addActionListener(actionListener);
+	}
+	
 	public String getNickName() {
 		return this.nickName;
 	}
@@ -85,6 +90,14 @@ public class ChatRoomFrame {
 	
 	public void dispose() {
 		this.frame.dispose();
+	}
+	
+	public String getMessageText() {
+		return this.txtMessage.getText();
+	}
+	
+	public void setMessageInput(String value) {
+		this.txtMessage.setText(value);
 	}
 	
 }

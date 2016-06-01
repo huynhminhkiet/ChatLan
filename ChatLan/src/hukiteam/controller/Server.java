@@ -54,8 +54,10 @@ public class Server {
 			String ch = "";
 			try {
 				ch = dis.readUTF();
+				
 				String cmd = ch.substring(0, ch.indexOf(","));
 				String msg = ch.substring(ch.indexOf(",") + 1);
+				
 				if (!cmd.equals("Join"))
 					incoming.close();
 				System.out.println("Hello " + msg);
@@ -67,11 +69,11 @@ public class Server {
 					ch = dis.readUTF();
 					cmd = ch.substring(0, ch.indexOf(","));
 					msg = ch.substring(ch.indexOf(",") + 1);
-					if (cmd.equals("Msg")) {
+					if (cmd.equals("Msg r")) {
 						for (int i = 0; i < this.crsv.cls.size(); i++) {
 							ServerThreadedHandler temp = this.crsv.cls.get(i);
 							if (temp != this) {
-								temp.dos.writeUTF("Msg," + this.name + ">>" + msg);
+								temp.dos.writeUTF("Msg r,► " + this.name + ": " + msg);
 							}
 						}
 					} else {

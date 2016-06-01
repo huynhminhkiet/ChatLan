@@ -61,4 +61,8 @@ public class LoginFrame {
 	public void setMessage(String msg) {
 		this.lMsg.setText(msg);
 	}
+	
+	public void dispose() {
+		this.frame.dispose();
+	}
 }
