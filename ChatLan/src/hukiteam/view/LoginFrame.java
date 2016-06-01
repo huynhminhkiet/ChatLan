@@ -14,8 +14,8 @@ public class LoginFrame {
 	private final int WIDTH = 300, HEIGHT = 300;
 	
 	private JLabel lname, lMsg;
-	private final JLabel msg;
-	private final JTextField txtName;
+	private JLabel msg;
+	private JTextField txtName, txtPort, txtIP;
 	private JButton btnLogin;
 	
 	public LoginFrame() {
@@ -32,6 +32,9 @@ public class LoginFrame {
 		lMsg.setPreferredSize(new Dimension(WIDTH, 50));
 		lMsg.setHorizontalAlignment(JLabel.CENTER);
 		
+		txtIP = new JTextField(7);
+		txtPort = new JTextField(6);
+		
 		lname = new JLabel("Name");
 		
 		txtName = new JTextField(20);
@@ -42,6 +45,10 @@ public class LoginFrame {
 		btnLogin = new JButton("Login");
 		
 		frame.add(lMsg);
+		frame.add(new JLabel("Ip Address"));
+		frame.add(txtIP);
+		frame.add(new JLabel("Port"));
+		frame.add(txtPort);
 		frame.add(lname);
 		frame.add(txtName);
 		frame.add(btnLogin);

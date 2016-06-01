@@ -23,7 +23,9 @@ public class ChatRoomController {
 			soc = new Socket("localhost", 5000);
 			this.dis = new DataInputStream(soc.getInputStream());
 			this.dos = new DataOutputStream(soc.getOutputStream());
+			
 			new ClientThreadedHandler(frame).start();
+			
 			this.dos.writeUTF("Join," + frame.getNickName());
 
 		} catch (IOException e) {
@@ -42,14 +44,27 @@ public class ChatRoomController {
 							+ frame.getNickName() + ": " + msg);
 
 					try {
-						dos.writeUTF("Msg r," + msg);
+						dos.writeUTF("Msg," + msg);
 					} catch (IOException e1) {
 						frame.dispose();
 						new LoginController();
 					}
 					frame.setMessageInput("");
 				}
-
+			}
+		});
+		
+		frame.addUpdateOLActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					dos.writeUTF("Update,");
+				} catch (IOException e1) {
+					frame.dispose();
+					new LoginController();
+				}
 			}
 		});
 	}
@@ -72,8 +87,19 @@ public class ChatRoomController {
 					ch = dis.readUTF();
 					String cmd = ch.substring(0, ch.indexOf(","));
 					String msg = ch.substring(ch.indexOf(",") + 1);
-					if (cmd.equals("Msg r"))
+					if (cmd.equals("Msg"))
 						this.cr.setChatAreaText(cr.getChatAreaText() + "\n" + msg);
+					if (cmd.equals("Joiner")) {
+						if (!msg.equals(null)) {
+							String [] onlineList = msg.split(";");
+							String onlineListStr = "<html>";
+							for (int i = 0; i < onlineList.length; i++) {
+								onlineListStr += onlineList[i] + "<br>";
+								
+							}
+							frame.setOnlineList(onlineListStr);
+						}
+					}
 
 				}
 			} catch (IOException e) {

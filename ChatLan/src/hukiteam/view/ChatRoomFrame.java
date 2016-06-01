@@ -21,8 +21,8 @@ public class ChatRoomFrame {
 	private JPanel pJoiners, pInput;
 	private JTextArea taRoom;
 	private JTextField txtMessage;
-	private JButton btnSend;
-	private JLabel lNickName;
+	private JButton btnSend, btnUpdateOnlList;
+	private JLabel lNickName, lOnlineList;
 	
 	private String nickName;
 
@@ -47,9 +47,21 @@ public class ChatRoomFrame {
 		lNickName.setPreferredSize(new Dimension(130, 30));
 		lNickName.setHorizontalAlignment(JLabel.CENTER);
 		
+		lOnlineList = new JLabel("Nobody");
+		
+		
+		JLabel lOnline = new JLabel("Online:");
+		lOnline.setPreferredSize(new Dimension(130, 30));
+		lOnline.setHorizontalAlignment(JLabel.CENTER);
+		
+		btnUpdateOnlList = new JButton("Refresh");
+		btnUpdateOnlList.setPreferredSize(new Dimension(130, 20));
+		
 		pJoiners.add(new JLabel("Me:"));
 		pJoiners.add(lNickName);
-		pJoiners.add(new JLabel("Online:"));
+		pJoiners.add(lOnline);
+		pJoiners.add(lOnlineList);
+		pJoiners.add(btnUpdateOnlList);
 		
 		// input message panel
 		pInput = new JPanel(new FlowLayout());
@@ -76,6 +88,10 @@ public class ChatRoomFrame {
 		this.btnSend.addActionListener(actionListener);
 	}
 	
+	public void addUpdateOLActionListener(ActionListener actionListener) {
+		this.btnUpdateOnlList.addActionListener(actionListener);
+	}
+	
 	public String getNickName() {
 		return this.nickName;
 	}
@@ -100,4 +116,7 @@ public class ChatRoomFrame {
 		this.txtMessage.setText(value);
 	}
 	
+	public void setOnlineList(String value) {
+		this.lOnlineList.setText(value);
+	} 
 }
